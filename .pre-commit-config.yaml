@@ -1,0 +1,67 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: f71fa2c1f9cf5cb705f73dffe4b21f7c61470ba9 # frozen: v4.4.0
+    hooks:
+      - id: check-ast
+      - id: check-toml
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+
+  - repo: https://github.com/psf/black
+    rev: b0d1fba7ac3be53c71fb0d3211d911e629f8aecb # frozen: 23.1.0
+    hooks:
+      - id: black
+
+  - repo: https://github.com/tox-dev/pyproject-fmt
+    rev: db78847faa4d18e04b061cf486176a60f30a30d7 # frozen: 0.9.1
+    hooks:
+      - id: pyproject-fmt
+        args: ["--indent=4"]
+
+  - repo: https://github.com/abravalheri/validate-pyproject
+    rev: cc27459d0f843a9333dd181e7451a8d041591a25 # frozen: v0.12.1
+    hooks:
+      - id: validate-pyproject
+
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: cafd5506f18eea191804850dacc0a4264772d59d # frozen: v3.0.0-alpha.4
+    hooks:
+      - id: prettier
+        # .git/COMMIT_EDITMSG: commitizen needs to read this file
+        exclude: >
+          (?x)^(
+            ^\.git/COMMIT_EDITMSG$
+          )$
+
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: a794b11a962f22e77e48eba5c50d505b7cd7e0b1 # frozen: v0.0.248
+    hooks:
+      - id: ruff
+
+  # - repo: https://github.com/pre-commit/mirrors-mypy
+  #   rev: 17a61c4f7a7cd6a28daa5c4b88c725030e45e641 # frozen: v1.0.1
+  #   hooks:
+  #     - id: mypy
+  #       # TODO
+  #       # args: ["--strict"]
+  #       additional_dependencies:
+  #         - pytest-mock
+  #         - typer[all]
+  #       exclude: "docs/"
+
+  # TODO: wait for https://github.com/FHPythonUtils/LicenseCheck/pull/33 to be merged
+
+  # - repo: https://github.com/FHPythonUtils/LicenseCheck/
+  #   rev: "5bbbb11e58d91a1df4e791f3d48e904a5a25b78d" # frozen: 2023
+  #   hooks:
+  #     - id: licensecheck
+  #       files: pyproject.toml
+  #       args: ["--format=ansi"]
+
+  # - repo: https://github.com/commitizen-tools/commitizen
+  #   rev: 65988f1ff11b947ecdbac6e8f8e3fea8f2851476 # frozen: v2.42.0
+  #   hooks:
+  #     - id: commitizen
+  #       additional_dependencies:
+  #         - "git+https://github.com/afuetterer/cz-github-changelog.git"

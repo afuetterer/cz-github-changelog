@@ -1,0 +1,76 @@
+[build-system]
+build-backend = "hatchling.build"
+requires = [
+    "hatchling",
+]
+
+[project]
+name = "cz-github-changelog"
+version = "0.0.0"
+description = "A commitizen plugin for more expressive changelog generation of GitHub projects."
+readme = "README.md"
+keywords = [
+    "changelog",
+    "commitizen",
+    "GitHub",
+]
+license = { text = "MIT" }
+authors = [{ name = "Heinz-Alexander Fuetterer", email = "fuetterh@posteo.de" }]
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: Implementation :: CPython",
+]
+dependencies = [
+    "commitizen>=2.42.1",
+]
+[project.urls]
+Documentation = "https://github.com/afuetterer/cz-github-changelog#readme"
+Issues = "https://github.com/afuetterer/cz-github-changelog/issues"
+Source = "https://github.com/afuetterer/cz-github-changelog"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cz_github_changelog"]
+
+[tool.black]
+# https://black.readthedocs.io/en/stable/usage_and_configuration
+line-length = 100
+target_version = ["py38", "py39", "py310", "py311"]
+
+[tool.ruff]
+# https://github.com/charliermarsh/ruff#configuration
+line-length = 100
+select = ["B", "E", "F", "I", "S", "UP"]
+# TODO: select = ["ALL"]
+src = ["src", "tests"]
+# Always autofix, but never try to fix "F401" (unused imports).
+fix = true
+unfixable = ["F401"]
+target-version = "py38"
+
+[tool.commitizen]
+# https://commitizen-tools.github.io/commitizen/config/
+name = "cz_github_changelog"
+major_version_zero = true
+version = "0.0.0"
+version_files = [
+    "pyproject.toml:version"
+]
+tag_format = "$version"
+bump_message = "chore(release): $new_version\n\n[skip-ci]"
+update_changelog_on_bump = true
+
+# TODO
+github_repo_owner = "afuetterer"
+github_repo_name = "cz-github-changelog"
+
+# TODO
+# https://commitizen-tools.github.io/commitizen/bump/
+# pre_bump_hooks
+# post_bump_hooks
