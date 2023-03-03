@@ -1,33 +1,12 @@
 """TODO."""
 import re
-from dataclasses import dataclass
 from typing import Optional
 
 from commitizen import git
 from commitizen.config.base_config import BaseConfig
 from commitizen.cz.conventional_commits import ConventionalCommitsCz
 
-
-@dataclass
-class GitHubRepo:
-    """TODO."""
-
-    owner: str
-    name: str
-
-    @property
-    def url(self) -> str:
-        return f"https://github.com/{self.owner}/{self.name}"
-
-    def get_commit_url(self, commit: git.GitCommit) -> str:
-        return f"{self.url}/commit/{commit.rev}"
-
-    def get_tag_url(self, tag: str) -> str:
-        return f"{self.url}/releases/tag/{tag}"
-
-    def get_compare_url(self, tag1: str, tag2: str) -> str:
-        return f"{self.url}/compare/{tag1}...{tag2}"
-
+from .helpers import GitHubRepo
 
 # header levels
 H1 = "#"
