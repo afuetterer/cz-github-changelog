@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+# [0.2.0](https://github.com/afuetterer/cz-github-changelog/compare/0.1.1...0.2.0) (2023-03-03)
+
+### Features
+
+- move class ([82f768c](https://github.com/afuetterer/cz-github-changelog/commit/82f768c918195b9850455544e82f2eb68f8929fd))
+
 ## [0.1.1](https://github.com/afuetterer/cz-github-changelog/compare/0.1.0...0.1.1) (2023-03-03)
 
 ### Bug Fixes
