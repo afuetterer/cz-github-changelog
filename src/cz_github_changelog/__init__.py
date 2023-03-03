@@ -71,29 +71,6 @@ class GitHubChangelogCz(ConventionalCommitsCz):
     def changelog_hook(self, full_changelog: str, partial_changelog: Optional[str]) -> str:
         """TODO."""
 
-        # if partial_changelog:
-        #     print("--------------------")
-        #     print("is partial_changelog")
-        #     print(type(partial_changelog))
-        #     print(partial_changelog)
-        #     print("--------------------")
-        #     pass
-
-        # if full_changelog:
-        #     print("--------------------")
-        #     print("is full_changelog")
-        #     print(type(full_changelog))
-        #     print(full_changelog)
-        #     print("--------------------")
-        #     pass
-
-        # TODO:
-        # sometimes setting "#" works
-        # What is incremental doing?
-
-        # Why is first minor tag not "#"?
-        # Compare url tag2 always 0.1.0?
-
         all_tags_pattern = r"^#{1,2} \[?(\d+.\d+.\d+)\]?"
         tags = re.findall(all_tags_pattern, full_changelog, re.MULTILINE)  # , re.VERBOSE])
         print("----------------")
