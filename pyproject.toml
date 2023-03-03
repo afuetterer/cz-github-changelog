@@ -6,7 +6,7 @@ requires = [
 
 [project]
 name = "cz-github-changelog"
-version = "0.1.0"
+version = "0.1.1"
 description = "A commitizen plugin for more expressive changelog generation of GitHub projects."
 readme = "README.md"
 keywords = [
@@ -58,7 +58,7 @@ target-version = "py38"
 # https://commitizen-tools.github.io/commitizen/config/
 name = "cz_github_changelog"
 major_version_zero = true
-version = "0.1.0"
+version = "0.1.1"
 version_files = [
     "pyproject.toml:version"
 ]

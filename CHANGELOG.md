@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.1](https://github.com/afuetterer/cz-github-changelog/compare/0.1.0...0.1.1) (2023-03-03)
+
+### Bug Fixes
+
+- remove comments ([8193b64](https://github.com/afuetterer/cz-github-changelog/commit/8193b6442b0d74bc25c6dbd94ae2736da2ca1575))
+
 # 0.1.0 (2023-03-03)
 
 ### Features
