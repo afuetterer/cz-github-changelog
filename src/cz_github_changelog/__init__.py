@@ -29,6 +29,11 @@ class GitHubRepo:
         return f"{self.url}/compare/{tag1}...{tag2}"
 
 
+# header levels
+H1 = "#"
+H2 = "##"
+
+
 class GitHubChangelogCz(ConventionalCommitsCz):
     """TODO."""
 
@@ -65,10 +70,22 @@ class GitHubChangelogCz(ConventionalCommitsCz):
 
     def changelog_hook(self, full_changelog: str, partial_changelog: Optional[str]) -> str:
         """TODO."""
-        if partial_changelog:
-            pass
-        if full_changelog:
-            pass
+
+        # if partial_changelog:
+        #     print("--------------------")
+        #     print("is partial_changelog")
+        #     print(type(partial_changelog))
+        #     print(partial_changelog)
+        #     print("--------------------")
+        #     pass
+
+        # if full_changelog:
+        #     print("--------------------")
+        #     print("is full_changelog")
+        #     print(type(full_changelog))
+        #     print(full_changelog)
+        #     print("--------------------")
+        #     pass
 
         # TODO:
         # sometimes setting "#" works
@@ -78,33 +95,51 @@ class GitHubChangelogCz(ConventionalCommitsCz):
         # Compare url tag2 always 0.1.0?
 
         all_tags_pattern = r"^#{1,2} \[?(\d+.\d+.\d+)\]?"
-        tags = re.findall(all_tags_pattern, full_changelog, re.MULTILINE)
-        print("tags:", tags)
+        tags = re.findall(all_tags_pattern, full_changelog, re.MULTILINE)  # , re.VERBOSE])
+        print("----------------")
+        print("all tags found in full_changelog:", tags)
 
         for tag_position, tag in enumerate(tags):
-            major, minor, patch = tag.split(".")
+            print(f"processing: {tag}")
+            print("--")
 
+            _, _, patch = tag.split(".")
+
+            heading = H2
             if patch == "0":
-                print(tag)
-                # make ## -> #
+                heading = H1
 
-            this_tag_pattern = rf"## {tag}"
+            this_tag_pattern = f"^#{{1,2}} {tag}"
 
             try:
                 this_tag = tags[tag_position]
                 previous_tag = tags[tag_position + 1]
                 compare_url = self.repo.get_compare_url(previous_tag, this_tag)
-                print(this_tag, previous_tag, "->", compare_url)
-
-                if patch == "0":
-                    this_tag_replace_pattern = f"# [{tag}]({compare_url})"
-                else:
-                    this_tag_replace_pattern = f"## [{tag}]({compare_url})"
-
-                full_changelog = re.sub(this_tag_pattern, this_tag_replace_pattern, full_changelog)
+                this_tag_replace_pattern = f"{heading} [{tag}]({compare_url})"
             except IndexError:
-                # last tag
-                pass
+                # earlist tag, has no previous tag -> no compare url possible
+                this_tag_replace_pattern = f"{heading} {tag}"
+
+            # print("--")
+            # print(tag)
+            # print("look for:", this_tag_pattern)
+            # print("replace with:", this_tag_replace_pattern)
+            # print()
+
+            # print(re.search(this_tag_pattern, full_changelog, re.MULTILINE))
+
+            # print("---")
+            # print("changelog before replacing:")
+            # print(full_changelog)
+            full_changelog = re.sub(
+                this_tag_pattern, this_tag_replace_pattern, full_changelog, flags=re.MULTILINE
+            )
+
+        # print()
+        # print("##############################################")
+        # print("--- output after replacing ---")
+        # print(full_changelog)
+        # print("##############################################")
         return full_changelog
 
 
