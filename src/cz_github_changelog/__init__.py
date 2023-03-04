@@ -14,12 +14,14 @@ H2 = "##"
 
 
 class GitHubChangelogCz(ConventionalCommitsCz):
-    """TODO."""
+    """Custom Commitizen class to generate more expressive GitHub changelogs.
 
-    # TODO
+    This class is based on the ConventionalCommitsCz class from commitizen.
+    """
 
+    # TODO:
     # Code Refactoring?
-    # Breakin Changes?
+    # Breaking Changes?
 
     # more?
     change_type_map = {
@@ -51,7 +53,7 @@ class GitHubChangelogCz(ConventionalCommitsCz):
         """TODO."""
 
         all_tags_pattern = r"^#{1,2} \[?(\d+.\d+.\d+)\]?"
-        tags = re.findall(all_tags_pattern, full_changelog, re.MULTILINE)  # , re.VERBOSE])
+        tags = re.findall(all_tags_pattern, full_changelog, re.MULTILINE)
         print("----------------")
         print("all tags found in full_changelog:", tags)
 
