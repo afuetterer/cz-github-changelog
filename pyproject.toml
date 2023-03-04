@@ -30,10 +30,37 @@ classifiers = [
 dependencies = [
     "commitizen>=2.42.1",
 ]
+[project.optional-dependencies]
+dev = [
+    "pre-commit",
+]
+test = [
+    "pytest",
+    "pytest-cov",
+]
 [project.urls]
 Documentation = "https://github.com/afuetterer/cz-github-changelog#readme"
 Issues = "https://github.com/afuetterer/cz-github-changelog/issues"
 Source = "https://github.com/afuetterer/cz-github-changelog"
+
+[tool.hatch.envs.default]
+dev-mode = true
+features = [
+    "dev",
+    "test",
+]
+
+[tool.hatch.envs.ci]
+dev-mode = false
+features = [
+    "dev",
+    "test",
+]
+
+[tool.hatch.envs.ci.scripts]
+lint = [
+    "pre-commit run --all-files --color=always"
+]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/cz_github_changelog"]

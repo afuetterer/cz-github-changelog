@@ -38,5 +38,18 @@ jobs:
       - name: Install Hatch
         run: pipx install hatch
 
-      - name: Run tests
-        run: hatch --version
+      - name: Install dependencies
+        run: hatch env create ci
+
+      # https://github.com/actions/cache
+      - name: Set up pre-commit cache
+        if: matrix.python-version == '3.11'
+        uses: actions/cache@69d9d449aced6a2ede0bc19182fadc3a0a42d2b0 # v3.2.6
+        with:
+          path: ~/.cache/pre-commit
+          key: ${{ runner.os }}-${{ matrix.python-version }}-pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}
+          restore-keys: ${{ runner.os }}-${{ matrix.python-version }}-pre-commit-
+
+      - name: Run code quality tests with pre-commit
+        if: matrix.python-version == '3.11'
+        run: hatch run ci:lint
